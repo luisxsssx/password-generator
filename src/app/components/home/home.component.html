@@ -1,0 +1,32 @@
+<app-navbar />
+
+<div
+  class="container-lg d-flex flex-column justify-content-center align-items-center"
+  style="height: auto"
+>
+  <div class="text-center mt-1 mb-1">
+    <h2 class="p-2 fw-bold">Random Password Generator</h2>
+    <p>Create strong and secure passwords to keep your account safe online.</p>
+  </div>
+
+  <div
+    class="btn-group btn-group-lg"
+    role="group"
+    aria-label="Large button group"
+  >
+    <button type="button" class="btn btn-outline-primary">
+      <a [routerLink]="['/encrypt']" routerLinkActive="router-link-active"
+        >Encrypt</a
+      >
+    </button>
+    <button type="button" class="btn btn-outline-primary">
+      <a [routerLink]="['/decrypt']" routerLinkActive="router-link-active"
+        >Decrypt</a
+      >
+    </button>
+  </div>
+
+  <div class="mt-5">
+    <app-password />
+  </div>
+</div>
