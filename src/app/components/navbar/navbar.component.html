@@ -1,4 +1,4 @@
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar">
   <div
     class="container-fluid d-flex align-items-center justify-content-between"
   >
@@ -14,23 +14,11 @@
     </a>
 
     <div class="btn-group" role="group" aria-label="Button group">
-      <button type="button" class="btn btn-outline-primary">
-        <a
-          [routerLink]="['/encrypt']"
-          routerLinkActive="router-link-active"
-          class="text-decoration-none text-primary"
-        >
-          Encrypt
-        </a>
+      <button type="button" class="btn" [routerLink]="['/encrypt']">
+        Encrypt
       </button>
-      <button type="button" class="btn btn-outline-primary">
-        <a
-          [routerLink]="['/decrypt']"
-          routerLinkActive="router-link-active"
-          class="text-decoration-none text-primary"
-        >
-          Decrypt
-        </a>
+      <button type="button" class="btn" [routerLink]="['/decrypt']">
+        Decrypt
       </button>
     </div>
   </div>

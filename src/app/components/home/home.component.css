@@ -5,3 +5,11 @@ footer {
 a {
     text-decoration: none;
 }
+
+.cont {
+    margin-left: 28%;
+}
+
+.btn-copy {
+    background-color: #d16014;
+}
