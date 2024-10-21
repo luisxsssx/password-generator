@@ -1,5 +1,7 @@
 <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid d-flex align-items-center">
+  <div
+    class="container-fluid d-flex align-items-center justify-content-between"
+  >
     <a class="navbar-brand" href="">
       <img
         src="lock.ico"
@@ -10,5 +12,26 @@
       />
       Random Password Generator
     </a>
+
+    <div class="btn-group" role="group" aria-label="Button group">
+      <button type="button" class="btn btn-outline-primary">
+        <a
+          [routerLink]="['/encrypt']"
+          routerLinkActive="router-link-active"
+          class="text-decoration-none text-primary"
+        >
+          Encrypt
+        </a>
+      </button>
+      <button type="button" class="btn btn-outline-primary">
+        <a
+          [routerLink]="['/decrypt']"
+          routerLinkActive="router-link-active"
+          class="text-decoration-none text-primary"
+        >
+          Decrypt
+        </a>
+      </button>
+    </div>
   </div>
 </nav>

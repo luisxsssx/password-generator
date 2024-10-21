@@ -2,31 +2,106 @@
 
 <div
   class="container-lg d-flex flex-column justify-content-center align-items-center"
-  style="height: auto"
 >
-  <div class="text-center mt-1 mb-1">
+  <div class="text-center mt-4">
     <h2 class="p-2 fw-bold">Random Password Generator</h2>
-    <p>Create strong and secure passwords to keep your account safe online.</p>
+    <p class="text-muted">
+      Create strong and secure passwords to keep your account safe online.
+    </p>
   </div>
 
-  <div
-    class="btn-group btn-group-lg"
-    role="group"
-    aria-label="Large button group"
-  >
-    <button type="button" class="btn btn-outline-primary">
-      <a [routerLink]="['/encrypt']" routerLinkActive="router-link-active"
-        >Encrypt</a
-      >
-    </button>
-    <button type="button" class="btn btn-outline-primary">
-      <a [routerLink]="['/decrypt']" routerLinkActive="router-link-active"
-        >Decrypt</a
-      >
-    </button>
-  </div>
+  <div class="w-75 mt-5">
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-8">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Your password will appear here"
+            readonly
+            [value]="generatedPassword"
+          />
+          <button class="btn btn-outline-secondary">
+            <span class="badge bg-success p-2">Very Strong</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-1 d-flex justify-content">
+        <button class="btn btn-primary btn-lg">Copy</button>
+      </div>
+    </div>
 
-  <div class="mt-5">
-    <app-password />
+    <div class="row mb-4">
+      <div class="col">
+        <label for="passwordLength" class="form-label">
+          Password length: <strong>{{ selectedValue }}</strong>
+        </label>
+        <div class="d-flex align-items-center w-75">
+          <button class="btn btn-outline-secondary me-2">-</button>
+          <input
+            type="range"
+            class="form-range flex-grow-1"
+            id="customRange1"
+            min="1"
+            max="32"
+            [(ngModel)]="selectedValue"
+            (input)="updateValue($event)"
+          />
+          <button class="btn btn-outline-secondary ms-2">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col">
+        <label class="form-check-label" for="characterCheckboxes"
+          >Characters used:</label
+        >
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col d-flex flex-wrap">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="uppercaseCheckbox"
+          />
+          <label class="form-check-label" for="uppercaseCheckbox">ABC</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="lowercaseCheckbox"
+          />
+          <label class="form-check-label" for="lowercaseCheckbox">abc</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="numbersCheckbox"
+          />
+          <label class="form-check-label" for="numbersCheckbox">123</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="symbolsCheckbox"
+          />
+          <label class="form-check-label" for="symbolsCheckbox">#$&</label>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<footer class="bg-body-tertiary text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05)">
+    © 2024
+    <a class="text-body" href="https://github.com/luisxsssx">Luis Carlos</a>
+  </div>
+</footer>
