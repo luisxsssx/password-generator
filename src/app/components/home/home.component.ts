@@ -3,6 +3,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 
 type Options = {
@@ -15,7 +16,7 @@ type Options = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, RouterLink, FormsModule],
+  imports: [NavbarComponent, RouterLink, FormsModule, NgIf],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -23,6 +24,7 @@ type Options = {
 export class HomeComponent implements OnInit {
   generatedPassword: string | null = null;
   selectedValue: number = 15;
+  showCopiedMessage: boolean = false;
 
   constructor(private title: Title) { }
 
@@ -85,6 +87,20 @@ export class HomeComponent implements OnInit {
         console.error("Unexpected error:", error);
       }
       this.generatedPassword = null;
+    }
+  }
+  async copyToTheHolder() {
+    if (this.generatedPassword !== null) {
+      try {
+        await navigator.clipboard.writeText(this.generatedPassword);
+        console.log("Text copied to clipboard");
+        this.showCopiedMessage = true;
+        setTimeout(() => this.showCopiedMessage = false, 4000);
+      } catch (err) {
+        console.error("Error when copying to clipboard", err);
+      }
+    } else {
+      console.error("No password generated to copy");
     }
   }
 }

@@ -29,7 +29,41 @@
             </div>
           </div>
           <div class="col-md-1 d-flex justify-content">
-            <button class="btn-copy btn btn-lg">Copy</button>
+            <button
+              type="button"
+              class="btn-copy btn btn-lg"
+              id="liveToastBtn"
+              (click)="copyToTheHolder()"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="toast-container position-fixed bottom-0 end-0 p-3"
+          *ngIf="showCopiedMessage"
+        >
+          <div
+            id="liveToast"
+            class="toast show"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div class="toast-header">
+              <strong class="me-auto">Contraseña Copiada</strong>
+              <small>Justo ahora</small>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="toast-body">
+              La contraseña ha sido copiada al portapapeles.
+            </div>
           </div>
         </div>
 
