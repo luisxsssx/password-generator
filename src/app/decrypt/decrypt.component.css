@@ -1,0 +1,56 @@
+.btn-decrypt {
+    background-color: #f26419;
+}
+
+.toast-container {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.blink {
+    animation: blinkEffect 0.2s ease-in-out 2;
+}
+
+@keyframes blinkEffect {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.disabled-textarea {
+    background-color: #f0f0f0;
+    color: #999;
+    pointer-events: none;
+    resize: none;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    z-index: 1;
+}
+
+.svg {
+    width: 20px;
+}
+
+.decrypt {
+    width: 40%;
+}

@@ -7,6 +7,15 @@
   <div class="container w-75">
     <br />
 
+    <div *ngIf="decryptedText" class="mb-3 position-relative">
+      <button
+        class="btn btn-copy position-absolute"
+        (click)="copyToClipboard()"
+      >
+        <img class="svg" src="copy.svg" />
+      </button>
+    </div>
+
     <div class="row g-3">
       <div class="col-md-6 mb-3">
         <textarea
@@ -14,16 +23,93 @@
           id="textarea1"
           rows="10"
           placeholder="Enter text to decrypt here"
+          [(ngModel)]="encryptedText"
         ></textarea>
       </div>
       <div class="col-md-6 mb-3">
         <textarea
-          class="form-control"
+          class="form-control disabled-textarea"
           readonly
           id="textarea2"
           rows="10"
           placeholder="Decrypted value will appear here"
+          [(ngModel)]="decryptedText"
         ></textarea>
+      </div>
+    </div>
+
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      *ngIf="showCopiedMessage"
+      [ngClass]="{ 'fade-out': isFadingOut }"
+    >
+      <div
+        id="liveToast"
+        class="toast show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Text Copied</strong>
+          <small>Just now</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">The text has been copied to the clipboard</div>
+      </div>
+    </div>
+
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      *ngIf="showErrorMessage"
+      [ngClass]="{ 'fade-out': isFadingOut }"
+    >
+      <div
+        id="liveToast"
+        class="toast show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Error</strong>
+          <small>Just now</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">
+          The secret key is incorrect or the text cannot be decrypted.
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      *ngIf="showWarningMessage"
+      [ngClass]="{ 'fade-out': isFadingOut }"
+    >
+      <div
+        id="liveToast"
+        class="toast show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Warning</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">Please, enter the key and original text</div>
       </div>
     </div>
 
@@ -33,17 +119,21 @@
           type="text"
           class="form-control"
           placeholder="Key"
+          [(ngModel)]="secretKey"
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
         />
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="button-addon2"
-        >
-          Generate Key
-        </button>
       </div>
+    </div>
+    <br />
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-lg decrypt btn-decrypt"
+        (click)="decrypt()"
+      >
+        Decrypt
+      </button>
     </div>
   </div>
 </div>

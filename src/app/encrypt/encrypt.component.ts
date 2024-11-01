@@ -3,13 +3,13 @@ import { NavbarComponent } from "../components/navbar/navbar.component";
 import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-encrypt',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, NgIf, RouterLink],
+  imports: [NavbarComponent, FormsModule, NgIf, RouterLink, NgClass],
   templateUrl: './encrypt.component.html',
   styleUrls: ['./encrypt.component.css']
 })
@@ -19,22 +19,23 @@ export class EncryptComponent implements OnInit {
   public encryptedText: string = '';
   public decryptedText: string = '';
   showToast: boolean = false;
-  selectLenght: number = 10;
-  shwoCopiedMessage: boolean = false;
+  selectLength: number = 10;
+  showCopiedMessage: boolean = false;
+  showWarningMessage: boolean = false;
   isFadingOut: boolean = false;
 
   constructor(private title: Title) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Encrypt - Password Manager')
+    this.title.setTitle('Encrypt - Password Manager');
   }
 
-  generateText(lenght: number): string {
+  generateText(length: number): string {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
 
-    for (let i = 0; i < lenght; i++) {
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
@@ -42,45 +43,52 @@ export class EncryptComponent implements OnInit {
   }
 
   randomSecretKey() {
-    const length = this.selectLenght;
-    try {
-      const key = this.generateText(length);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      } else {
-        console.error("Unexpected error:", err);
-      }
-    }
+    const length = this.selectLength;
+    this.secretKey = this.generateText(length);
+    console.log('Generated Secret Key:', this.secretKey);
   }
 
-  encrypt() {
+  async encrypt() {
     if (this.secretKey && this.originalText) {
-      this.encryptedText = CryptoJS.AES.encrypt(this.originalText, this.secretKey).toString();
+      try {
+        this.encryptedText = CryptoJS.AES.encrypt(this.originalText, this.secretKey).toString();
+        this.showWarningMessage = false;
+      } catch (err) {
+        console.error("Error encrypting text:", err);
+      }
     } else {
-      alert('Please, enter the secret key and original text');
+      this.showWarningMessage = true;
+      console.error("Please enter both a secret key and original text.");
+
+      setTimeout(() => {
+        this.isFadingOut = true;
+        setTimeout(() => {
+          this.showWarningMessage = false;
+          this.isFadingOut = false;
+        }, 500);
+      }, 3000);
     }
   }
 
   async copyToClipboard() {
-    if (this.generateText !== null) {
+    if (this.encryptedText) {
       try {
         await navigator.clipboard.writeText(this.encryptedText);
         console.log('Text copied to clipboard');
-        this.shwoCopiedMessage = true;
+        this.showCopiedMessage = true;
         this.isFadingOut = false;
 
         setTimeout(() => {
           this.isFadingOut = true;
           setTimeout(() => {
-            this.shwoCopiedMessage = false;
+            this.showCopiedMessage = false;
           }, 500);
         }, 3000);
       } catch (err) {
         console.error('Error when copying to clipboard', err);
       }
     } else {
-      console.error("No text generated copy");
+      console.error("No text generated to copy");
     }
   }
 
@@ -88,5 +96,4 @@ export class EncryptComponent implements OnInit {
     this.showToast = true;
     setTimeout(() => this.showToast = false, 3000);
   }
-
 }
