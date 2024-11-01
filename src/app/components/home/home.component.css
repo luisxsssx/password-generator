@@ -2,14 +2,35 @@ footer {
     margin-top: 10%;
 }
 
-a {
-    text-decoration: none;
-}
-
 .cont {
     margin-left: 28%;
 }
 
 .btn-copy {
     background-color: #f26419;
+}
+
+.toast-container {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.blink {
+    animation: blinkEffect 0.2s ease-in-out 2;
+}
+
+@keyframes blinkEffect {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
