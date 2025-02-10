@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-encrypt',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, NgIf, RouterLink, NgClass],
+  imports: [NavbarComponent, FormsModule, NgIf, NgClass],
   templateUrl: './encrypt.component.html',
   styleUrls: ['./encrypt.component.css']
 })

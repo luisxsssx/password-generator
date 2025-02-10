@@ -15,7 +15,7 @@ type Options = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavbarComponent, RouterLink, FormsModule, NgIf],
+  imports: [NavbarComponent, FormsModule, NgIf],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -61,13 +61,12 @@ export class HomeComponent implements OnInit {
 
   toggleCheckbox(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const checkboxName = inputElement.nextElementSibling?.textContent?.trim(); // Obtiene el texto del label
+    const checkboxName = inputElement.nextElementSibling?.textContent?.trim();
 
     if (checkboxName === 'Include Uppercase Letters') {
       this.options.includeUppercase = inputElement.checked;
     }
-    // Agrega más condiciones aquí si tienes más checkboxes
-    this.generateRandomText(); // Regenera la contraseña después de cambiar la opción
+    this.generateRandomText();
   }
 
   generateText(length: number, options: Options): string {
