@@ -1,36 +1,125 @@
-footer {
-    margin-top: 10%;
+.password-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
 }
 
-.cont {
-    margin-left: 28%;
+.password-display {
+  background: var(--bg-light);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  word-break: break-all;
 }
 
 .btn-copy {
-    background-color: #f26419;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
 }
 
-.toast-container {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.btn-copy:hover {
+  background-color: var(--primary-color-dark);
+  color: white;
 }
 
-.fade-out {
-    opacity: 0;
-    transform: translateY(20px);
+.btn-copy:active {
+  transform: scale(0.98);
 }
 
-.blink {
-    animation: blinkEffect 0.2s ease-in-out 2;
+.btn-refresh {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
 }
 
-@keyframes blinkEffect {
+.btn-refresh:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
 
-    0%,
-    100% {
-        opacity: 1;
-    }
+.btn-refresh svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
 
-    50% {
-        opacity: 0;
-    }
+.character-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.char-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.char-option:hover {
+  background: #e9ecef;
+}
+
+.char-option.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.char-option .char-label {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.checkbox-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 576px) {
+  .password-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+
+  .password-display {
+    font-size: 0.95rem;
+    padding: 0.875rem 1rem;
+  }
+
+  .btn-copy {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .character-options {
+    gap: 0.5rem;
+  }
+
+  .char-option {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .form-range {
+    width: 100%;
+  }
 }

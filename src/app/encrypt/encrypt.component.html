@@ -1,136 +1,112 @@
 <app-navbar />
 
-<div class="container-lg">
-  <div class="text-center mt-1 mb-1">
-    <h2 class="p-2 fw-bold">Encrypt Text</h2>
+<div class="container-lg page-container">
+  <div class="text-center mt-3 mt-md-4 mb-3">
+    <h2 class="fw-bold">Encrypt Text</h2>
   </div>
-  <div class="container w-75">
-    <br />
 
-    <div *ngIf="encryptedText" class="mb-3 position-relative">
-      <button
-        class="btn btn-copy position-absolute"
-        (click)="copyToClipboard()"
-      >
-        <img class="svg" src="copy.svg" />
-      </button>
-    </div>
-
-    <div class="row g-3">
-      <div class="col-md-6 mb-3">
-        <textarea
-          class="form-control"
-          id="textarea1"
-          rows="10"
-          placeholder="Enter text to encrypt here"
-          [(ngModel)]="originalText"
-        ></textarea>
-      </div>
-
-      <div class="col-md-6 mb-3">
-        <textarea
-          class="form-control disabled-textarea"
-          readonly
-          id="textarea2"
-          rows="10"
-          placeholder="Encrypted value will appear here"
-          >{{ encryptedText }}</textarea
-        >
-      </div>
-    </div>
-
-    <div
-      class="toast-container position-fixed bottom-0 end-0 p-3"
-      *ngIf="showCopiedMessage"
-      [ngClass]="{ 'fade-out': isFadingOut }"
-    >
-      <div
-        id="liveToast"
-        class="toast show"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="toast-header">
-          <strong class="me-auto">Text Copied</strong>
-          <small>Just now</small>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="toast-body">The text has been copied to the clipboard</div>
-      </div>
-    </div>
-
-    <div
-      class="toast-container position-fixed bottom-0 end-0 p-3"
-      *ngIf="showWarningMessage"
-      [ngClass]="{ 'fade-out': isFadingOut }"
-    >
-      <div
-        id="liveToast"
-        class="toast show"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div class="toast-header">
-          <strong class="me-auto">Warning</strong>
-          <small>Just now</small>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="toast-body">
-          Please, enter the secret key and original text
-        </div>
-      </div>
-    </div>
-
-    <div class="row g-3 w-50">
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Key"
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-          [(ngModel)]="secretKey"
-        />
+  <div class="container-fluid px-2 px-md-4">
+    <div class="mx-auto" style="max-width: 900px;">
+      <div class="textarea-wrapper mb-3" *ngIf="encryptedText">
         <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="button-addon2"
-          (click)="randomSecretKey()"
+          class="copy-btn"
+          (click)="copyToClipboard()"
+          title="Copy to clipboard"
         >
-          Generate Key
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+          </svg>
         </button>
       </div>
-    </div>
 
-    <br />
+      <div class="row g-3 g-md-4">
+        <div class="col-12 col-md-6">
+          <textarea
+            class="form-control"
+            rows="8"
+            placeholder="Enter text to encrypt here"
+            [(ngModel)]="originalText"
+          ></textarea>
+        </div>
 
-    <div class="text-center">
-      <button
-        type="button"
-        class="btn btn-lg encrypt btn-encrypt"
-        (click)="encrypt()"
+        <div class="col-12 col-md-6">
+          <textarea
+            class="form-control disabled-textarea"
+            readonly
+            rows="8"
+            placeholder="Encrypted value will appear here"
+          >{{ encryptedText }}</textarea>
+        </div>
+      </div>
+
+      <div
+        class="toast-container position-fixed bottom-0 end-0 p-3"
+        *ngIf="showCopiedMessage"
+        [ngClass]="{ 'fade-out': isFadingOut }"
       >
-        Encrypt
-      </button>
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Text Copied</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">The text has been copied to the clipboard</div>
+        </div>
+      </div>
+
+      <div
+        class="toast-container position-fixed bottom-0 end-0 p-3"
+        *ngIf="showWarningMessage"
+        [ngClass]="{ 'fade-out': isFadingOut }"
+      >
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Warning</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">Please enter the secret key and original text</div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12 col-sm-8 col-md-6">
+          <div class="input-group password-input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Secret Key"
+              [(ngModel)]="secretKey"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="randomSecretKey()"
+            >
+              Generate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4 mb-4">
+        <button
+          type="button"
+          class="btn btn-encrypt btn-lg px-5"
+          (click)="encrypt()"
+        >
+          Encrypt
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-<footer class="bg-body-tertiary text-center text-lg-start fixed-bottom">
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05)">
-    © 2024
-    <a class="text-body" href="https://github.com/luisxsssx">Luis Carlos</a>
+<footer class="bg-body-tertiary text-center py-3">
+  <div class="container">
+    <p class="mb-0 text-muted small">
+      © {{ currentYear }}
+      <a class="text-body" href="https://github.com/luisxsssx">Luis Carlos</a>
+    </p>
   </div>
 </footer>

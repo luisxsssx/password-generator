@@ -1,25 +1,43 @@
-<nav class="navbar">
-  <div
-    class="container-fluid d-flex align-items-center justify-content-between"
-  >
-    <a class="navbar-brand" href="">
-      <img
-        src="lock.ico"
-        width="25"
-        class="me-1"
-        style="margin-top: -8px"
-        alt="Password Icon"
-      />
-      Random Password Generator
+<nav class="navbar navbar-expand-sm">
+  <div class="container-fluid px-3 px-md-4">
+    <a class="navbar-brand" routerLink="/">
+      <img src="lock.ico" alt="Lock Icon" />
+      Password Generator
     </a>
 
-    <div class="btn-group" role="group" aria-label="Button group">
-      <button type="button" class="btn" [routerLink]="['/encrypt']">
-        Encrypt
-      </button>
-      <button type="button" class="btn" [routerLink]="['/decrypt']">
-        Decrypt
-      </button>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <div class="btn-group" role="group">
+        <button
+          type="button"
+          class="nav-btn"
+          [routerLink]="['/encrypt']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Encrypt
+        </button>
+        <button
+          type="button"
+          class="nav-btn"
+          [routerLink]="['/decrypt']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Decrypt
+        </button>
+      </div>
     </div>
   </div>
 </nav>

@@ -1,56 +1,97 @@
 .btn-decrypt {
-    background-color: #f26419;
+  background-color: var(--primary-color);
+  color: white;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  min-width: 120px;
 }
 
-.toast-container {
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.btn-decrypt:hover {
+  background-color: var(--primary-color-dark);
+  color: white;
 }
 
-.fade-out {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.blink {
-    animation: blinkEffect 0.2s ease-in-out 2;
-}
-
-@keyframes blinkEffect {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
+.btn-decrypt:active {
+  transform: scale(0.98);
 }
 
 .disabled-textarea {
-    background-color: #f0f0f0;
-    color: #999;
-    pointer-events: none;
-    resize: none;
-    border: 1px solid #ccc;
-    cursor: not-allowed;
+  background-color: #f0f0f0;
+  color: #999;
+  pointer-events: none;
+  resize: none;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
 }
 
-.position-relative {
-    position: relative;
+.textarea-wrapper {
+  position: relative;
 }
 
-.position-absolute {
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    z-index: 1;
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
 }
 
-.svg {
-    width: 20px;
+.copy-btn:hover {
+  opacity: 1;
+  background-color: var(--primary-color-dark);
 }
 
-.decrypt {
-    width: 40%;
+.copy-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+.password-input-group {
+  max-width: 500px;
+  width: 100%;
+}
+
+.password-input-group .form-control {
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .btn-decrypt {
+    width: 100% !important;
+    min-width: unset;
+  }
+
+  .copy-btn {
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+  }
+
+  .copy-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .row g-3 {
+    --bs-gutter-y: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .copy-btn {
+    top: 5px;
+    right: 5px;
+    padding: 3px 6px;
+  }
+
+  .copy-btn svg {
+    width: 14px;
+    height: 14px;
+  }
 }

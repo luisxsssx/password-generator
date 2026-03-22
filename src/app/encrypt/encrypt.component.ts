@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { NgClass, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-encrypt',
@@ -23,6 +22,7 @@ export class EncryptComponent implements OnInit {
   showCopiedMessage: boolean = false;
   showWarningMessage: boolean = false;
   isFadingOut: boolean = false;
+  currentYear = new Date().getFullYear();
 
   constructor(private title: Title) { }
 

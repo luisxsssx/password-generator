@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
@@ -24,6 +23,7 @@ export class HomeComponent implements OnInit {
   selectedValue: number = 15;
   showCopiedMessage: boolean = false;
   isFadingOut: boolean = false;
+  currentYear = new Date().getFullYear();
 
   options: Options = {
     includeNumbers: true,
@@ -36,37 +36,43 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Password Manager');
-    this.generateRandomText();
+    this.generateRandomText(true);
   }
 
   updateValue(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.selectedValue = +inputElement.value;
-    this.generateRandomText();
+    this.generateRandomText(false);
   }
 
   increaseValue() {
     if (this.selectedValue < 32) {
       this.selectedValue++;
-      this.generateRandomText();
+      this.generateRandomText(false);
     }
   }
 
   decreaseValue() {
     if (this.selectedValue > 1) {
       this.selectedValue--;
-      this.generateRandomText();
+      this.generateRandomText(false);
     }
   }
 
-  toggleCheckbox(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const checkboxName = inputElement.nextElementSibling?.textContent?.trim();
-
-    if (checkboxName === 'Include Uppercase Letters') {
-      this.options.includeUppercase = inputElement.checked;
+  toggleOption(option: keyof Options): void {
+    const isCurrentlyEnabled = this.options[option];
+    
+    if (isCurrentlyEnabled) {
+      const otherOptionsEnabled = Object.keys(this.options).filter(
+        (key) => key !== option && this.options[key as keyof Options]
+      );
+      if (otherOptionsEnabled.length === 0) {
+        return;
+      }
     }
-    this.generateRandomText();
+    
+    this.options[option] = !isCurrentlyEnabled;
+    this.generateRandomText(false);
   }
 
   generateText(length: number, options: Options): string {
@@ -87,7 +93,7 @@ export class HomeComponent implements OnInit {
     }
 
     if (characters.length === 0) {
-      throw new Error("You must include at least one type of character: uppercase, lowercase, numbers, or special characters.");
+      throw new Error("You must include at least one type of character.");
     }
 
     for (let i = 0; i < length; i++) {
@@ -102,11 +108,15 @@ export class HomeComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  generateRandomText() {
+  generateRandomText(animate: boolean = false) {
     const length = this.selectedValue;
     try {
       const password = this.generateText(length, this.options);
-      this.animatePasswordDisplay(password);
+      if (animate) {
+        this.animatePasswordDisplay(password);
+      } else {
+        this.generatedPassword = password;
+      }
     } catch (error) {
       console.error("Error generating password:", error instanceof Error ? error.message : error);
       this.generatedPassword = null;

@@ -3,13 +3,12 @@ import { NavbarComponent } from "../components/navbar/navbar.component";
 import { Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
-import { RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-decrypt',
   standalone: true,
-  imports: [NavbarComponent, FormsModule, RouterLink, NgClass, NgIf],
+  imports: [NavbarComponent, FormsModule, NgClass, NgIf],
   templateUrl: './decrypt.component.html',
   styleUrls: ['./decrypt.component.css']
 })
@@ -23,6 +22,7 @@ export class DecryptComponent implements OnInit {
   showWarningMessage: boolean = false;
   showErrorMessage: boolean = false;
   isFadingOut: boolean = false;
+  currentYear = new Date().getFullYear();
 
   constructor(private title: Title) { }
 
